@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Image from "next/image";
 import "./globals.css";
+import Link from "next/link";
+import { MailIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +28,59 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh]`}
       >
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <header className="w-full">
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <div>
+                <Image
+                  className="h-[50px] w-auto"
+                  src="/logo_full_dark.svg"
+                  alt="Summit Realty logo"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  priority
+                />
+              </div>
+            </div>
+          </header>
+          <main className="flex-grow">
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
+              {children}
+            </div>
+          </main>
+          <footer className="w-full sticky bottom-0">
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
+              <div className="flex justify-center">
+                <Link href="/">
+                  <Image
+                    className="h-[50px] w-auto"
+                    src="/logo_min.svg"
+                    alt="Summit Realty logo"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    priority
+                  />
+                </Link>
+              </div>
+              <div className="flex justify-center items-center mt-8">
+                <p className="text-center text-sm">
+                  &copy; {new Date().getFullYear()} Abdul Aliyev
+                </p>
+                <a
+                  className="ml-2 btn btn-sm"
+                  target="_blank"
+                  href="https://www.aaliyev.com/contact"
+                >
+                  <MailIcon /> Get in touch
+                </a>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
